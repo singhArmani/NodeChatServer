@@ -4,6 +4,10 @@ let counter = 0; // to keep a record of socket ids.
 
 let sockets = {}; // to store every socket that gets created every time a client is connected.
 
+function timeStamp() {
+    const now = new Date();
+    return `${now.getHours()}: ${now.getMinutes()}`
+}
 server.on('connection', socket => {
     socket.id = counter++;
 
@@ -28,7 +32,7 @@ server.on('connection', socket => {
             if (socket.id == key ) {
                 continue;
             }
-            cs.write(`${socket.name}: `);
+            cs.write(`${socket.name} (${timeStamp()}) `);
             cs.write(data);
         }
     });
